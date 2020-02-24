@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
-
 {% block body %}
-    <h1>Hi</h1>
+    <br/>
+    {% if api %}
+        {% if api == 'Error' %} 
+            There was an Error....Please try after some time   
+        {% else %}
+            <div class="jumbotron" id="jumb">
+                <h1 class="display-4"><b> {{api.name}}, {{api.sys.country}} </b></h1>
+                <p class="lead"><b style="padding: 5px;">Description :{{api.weather.0.description|capfirst}}</b></p>
+                <hr class="my-4">
+                <img src={{icon_url}} id="icon" class="rounded float-right" alt="...">
+                <p class="lead"><b style="padding: 5px;">Temperature :{{api.main.temp}} &#8451;</b></p>
+                <p class="lead"><b style="padding: 5px;">Temperature Minimum :{{api.main.temp_min}} &#8451;</b></p>
+                <p class="lead"><b style="padding: 5px;">Temperature Maximum :{{api.main.temp_max}} &#8451;</b></p>
+                <br>
+                <a class="btn btn-primary btn-lg" href="{% url 'index' %}" role="button">Search Another</a>
+            </div>
+             <br/>
+        {% endif %}
+    {% else %}
+            <div class="jumbotron" id="jumb">
+                <h1 class="display-4" style="font-size:larger;"><b> Hi there.....Please Enter Zipcode of your city to know the weather conditions </b></h1>
+            </div>
+    {% endif %}
 {% endblock body %}
-    
